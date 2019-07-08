@@ -1,0 +1,39 @@
+<div class="userProfile" ng-controller="profileCtrl as proCtrl" style="display: flex">
+    <div class="userInterest split left">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="some">
+                    <h2 ng-show="proCtrl.noInterest.length == 0">Recent Saved Interest Points</h2>
+                    <h2 ng-show="proCtrl.noInterest.length > 0"> {{proCtrl.noInterest}}</h2>
+                    <a ng-show="proCtrl.noInterest.length == 0" title="Move To Full List" style="text-align: center;" href="#!/favorites">
+                        <i class="fa fa-arrow-circle-o-right"></i> Full List</a>
+                </div>
+                <ul ng-repeat="poi in proCtrl.userInterest">
+                    <li>
+                        <a id="title" name="{{poi.name}}" class="title" href ng-click="proCtrl.getDetails($event)">{{poi.name}}
+                            <img src={{poi.picture}} name="{{poi.name}}" style="width:100%">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="userInterest split right" style="float: right">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="some">
+                    <h2>Recommended Interests</h2>
+                    <ul ng-repeat="poi in proCtrl.interestRecommended">
+                        <li>
+                            <a name="{{poi.name}}" class="title" href ng-click="proCtrl.getDetails($event)">{{poi.name}}
+                                <img src={{poi.picture}} name="{{poi.name}}" style="width:100%"
+                                     ng-click="proCtrl.getDetails($event)">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

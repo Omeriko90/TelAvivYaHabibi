@@ -1,0 +1,17 @@
+{
+  "name": "telavivyahabibi_update",
+  "version": "1.0.0",
+  "description": "Tel Aviv interests points site",
+  "main": "app.js",
+  "dependencies": {
+    "angularjs-slider": "^7.0.0",
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

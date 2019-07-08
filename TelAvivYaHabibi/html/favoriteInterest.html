@@ -1,0 +1,108 @@
+<div style="float: left; border: 2px solid black; background: rgba(0, 0, 0, 0.5);margin-top: 3px; margin-left: 1px">
+    <div style="margin-left: 3px; margin-top: 3px;">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" ng-model="search" style="margin-bottom: 5px" type="search"
+                   placeholder="Search By Name"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" ng-model="searchButton" style="border-color: white"
+                    type="submit"
+                    ng-click="searchInterest()">Search
+            </button>
+        </form>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" ng-model="chooseCategory" style="margin-bottom: 5px" type="search"
+                   placeholder="Search By Category" aria-label="chooseCategory">
+            <button class="btn btn-outline-success my-2 my-sm-0" ng-model="chooseCategory" style="border-color: white"
+                    type="submit"
+                    ng-click="chooseByCategory()">Search
+            </button>
+        </form>
+        <div>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="border-color: white; padding-right: 17px;"
+                    type="submit"
+                    ng-click="sortByMaxRank()">Sort descending
+            </button>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="border-color: white; margin-left: 11px;"
+                    type="submit"
+                    ng-click="sortByMinRank()">Sort Ascending
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="border-color: white"
+                    ng-model="chooseEndCategory"
+                    type="submit"
+                    ng-click="sortByCategory()">Sort By Category
+            </button>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="border-color: white; margin-left: 11px"
+                    ng-model="chooseEndCategory"
+                    type="submit"
+                    ng-click="sortByUserChoice()">Sort By Choice
+            </button>
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="border-color: white; margin: 89px;"
+                    type="submit"
+                    ng-click="saveToUser()">Save Changes
+            </button>
+        </div>
+    </div>
+</div>
+<div style="display: flex">
+    <div class="login-wrap">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="some">
+                    <h2>
+                        Your Favorite Interest Points
+                    </h2>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="interest">
+                        <ul ng-repeat="category in userInterests">
+                            <li>
+                                <a name="{{category.name}}" class="title" href ng-click="getDetails($event)">{{category.name}}
+                                    <img src={{category.picture}} name="{{category.name}}" style="width:100%">
+                                </a>
+                                <div class="intGroup" ng-model="category">
+                                    <i class="fa fa-star fa-lg fullStar" style="margin: 10px;"
+                                       title="Add to favorite" ng-click="save($event)"></i>
+                                    <i class="fa fa-hand-o-right fa-lg" style="margin: 10px; display: none"
+                                       title="Move To Sorted List" ng-click="addToSortUser(category.name)"></i>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-wrap" id="sorting" style="display: none; float: right;">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="some">
+                    <h2>
+                        Sort As You Like
+                    </h2>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="interest">
+                        <ul ng-repeat="category in userSortedList">
+                            <li>
+                                <a name="{{category.name}}" class="title" href ng-click="getDetails($event)">{{category.name}}
+                                    <img src={{category.picture}} name="{{category.name}}" style="width:100%">
+                                </a>
+                                <div class="intGroup" ng-model="category">
+                                    <i class="fa fa-hand-o-left fa-lg" style="margin: 10px;"
+                                       title="Move To Sorted List" ng-click="removeFromSortUser($index)"></i>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

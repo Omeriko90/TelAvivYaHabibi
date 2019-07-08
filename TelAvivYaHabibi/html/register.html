@@ -1,0 +1,103 @@
+<div class="login-wrap">
+    <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Registration
+        details</label>
+        <input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab">Questions & Interest
+        Categories</label>
+        <div class="login-form">
+            <form name="myForm" ng-submit="myCtrl.validateUser(myForm.$valid)" novalidate>
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label class="label">First Name</label>
+                        <input type="text" name="firstname" class="input" ng-model="myCtrl.firstname" ng-required="true"
+                               ng-blur="myCtrl.checkLetter($event)" required>
+                        <span class="error" style="display: none">First name can't contain numbers</span>
+                        <span class="error" id="firstname" style="display: none">first name is require</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">Last Name</label>
+                        <input type="text" name="lastname" class="input" ng-model="myCtrl.lastname" ng-required="true"
+                               ng-blur="myCtrl.checkLetter($event)" required>
+                        <span class="error" style="display: none">Last name can't contain numbers</span>
+                        <span class="error" id="lastname" style="display: none">last name is require</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">Username</label>
+                        <input type="text" name="username" class="input" ng-model="myCtrl.username" ng-required="true"
+                               ng-maxlength="8" ng-minlength="3" ng-blur="myCtrl.checkLetter($event)" required>
+                        <span class="error" style="display: none">Username can't contain numbers</span>
+                        <span class="error" id="username" style="display: none">Username is require</span>
+                        <span class="error" ng-if="myForm.username.$touched  && myForm.username.$invalid">Username should be between 3 to 8 characters long.</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">Password</label>
+                        <input type="password" class="input" ng-model="myCtrl.password" ng-required="true"
+                               ng-maxlength="10" ng-minlength="5" required>
+                        <span class="error" id="password" style="display: none">Password is require</span>
+                        <span class="error" style="display: none"
+                              ng-show="myForm.password.$touched && myForm.password.$invalid">Password should be between 5 and 10 characters.</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">City</label>
+                        <input type="text" name="city" class="input" ng-model="myCtrl.city" ng-required="true"
+                               ng-blur="myCtrl.checkLetter($event)" required>
+                        <span class="error" id="city" style="display: none">City name is require</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">Country</label>
+                        <select type="text" class="label" placeholder="Country" id="country" ng-model="myCtrl.currentCountry"
+                                ng-change="myCtrl.nextPage()">
+                            <option class="label" ng-repeat="country in myCtrl.countries" value={{country.name}}>
+                                {{country.name}}
+                            </option>
+                        </select>
+                        <span class="error" id="countrySpan" style="display: none">Country is require</span>
+                    </div>
+                    <div class="group">
+                        <label class="label">Email</label>
+                        <input type="email" name="email" class="input" ng-model="myCtrl.email" ng-required="true" required>
+                        <span class="error" id="email" style="display: none">Email is require</span>
+                    </div>
+                </div>
+                <div class="for-pwd-htm">
+                    <div class="group">
+                        <div ng-repeat="q in myCtrl.questions" class="group">
+                            <label class="label">Restore Question</label>
+                            <input type="text" name="questionText" class="input" ng-model="myCtrl.question[$index]" placeholder="Enter your question" ng-required="true" required>
+                            <span class="error" name="questionSpan" style="display: none">Question is require</span>
+                            <label class="label">Answer</label>
+                            <input type="text" name="answerText" class="input" ng-model="myCtrl.answer[$index]" placeholder="Enter your answer" ng-required="true" required>
+                            <span class="error" name="answerSpan" style="display: none">Answer is require</span>
+                        </div>
+                        <input type="button" class="button" value="Add another Question" ng-click="myCtrl.addQuestion()">
+                    </div>
+
+                    <div class="group">
+                        <h3>Choose Interest Category</h3>
+                        <div>
+                            <input id="Restaurant" type="checkbox" ng-true-value="'Restaurants'"
+                                   ng-model="myCtrl.restaurant"
+                                   ng-change="myCtrl.addCategory('Restaurants')"/> Restaurants
+                            <br>
+                            <input id="NightLife" type="checkbox" ng-true-value="'Night Life'"
+                                   ng-model="myCtrl.nightLife"
+                                   ng-change="myCtrl.addCategory('Night Life')"/> Night Club
+                        </div>
+                        <div>
+                            <input id="Shopping" type="checkbox" ng-true-value="'Shopping'" ng-model="myCtrl.shopping"
+                                   ng-change="myCtrl.addCategory('Shopping')"/> Shopping
+                            <br>
+                            <input id="Attraction" type="checkbox" ng-true-value="'Attractions'"
+                                   ng-model="myCtrl.attraction"
+                                   ng-change="myCtrl.addCategory('Attractions')"/> Attractions
+                        </div>
+                        <span class="error" id="category" style="display: none">You need to pick at least 2 categories</span>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Register">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

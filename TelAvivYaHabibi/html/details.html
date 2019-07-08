@@ -1,0 +1,41 @@
+<div class="login-wrap" ng-controller="detailCtrl as dtCtrl">
+    <div class="login-html">
+        <div class="login-form">
+            <div class="some" style="color: sandybrown;">
+                <label>Name : {{dtCtrl.interest.name}}</label>
+                <br>
+                <label>Description: </label>
+                <p>{{dtCtrl.interest.description}}</p>
+                <br>
+                <label>Views: {{dtCtrl.interest.numOfView}}</label>
+                <br>
+                <label>Rank: {{dtCtrl.interest.rank}}%</label>
+                <br>
+                <label>Reviews: </label>
+                <br>
+                <h8 ng-show="dtCtrl.reviews[0] === 'There is no reviews for this interest'">This interest point has no reviews yet</h8>
+                <div style="border: 1px solid white;" ng-show="dtCtrl.reviews[0] !== 'There is no reviews for this interest'">
+                    <ol ng-repeat="review in dtCtrl.reviews" >
+                        <li><p>
+                            <label><b>Interest Name:</b> {{review.nameInterest}}</label>
+                            <br>
+                            <label>Rank: {{review.rank}} Stars</label>
+                            <br>
+                            <label ng-if="review.verbelReview.length > 0">Verbel Review:
+                                <br>
+                                <br>
+                                "{{review.verbelReview}}"</label>
+                        </p></li>
+                    </ol>
+                </div>
+                <br>
+                <br>
+                <div id="map"></div>
+                <div style="color: white" ng-show="dtCtrl.username !=='Guest'">
+                    <i class="fa fa-star fa-5x" style="margin: 10px;" title="Add to favorite"
+                       ng-click="dtCtrl.save($event)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
