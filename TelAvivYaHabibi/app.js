@@ -76,8 +76,24 @@ app.factory('userService', function () {
         }
         return favorites;
     };
-    model.updateFavoriteDB = function ($http) {
-
+    model.updateFavoriteDB = function ($http,favorite) {
+        var req = {
+            method: 'PUT',
+            url: 'http://localhost:3000/private/privateInterest/sortedList',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': this.getToken()
+            },
+            data: {
+                'username': this.getUsername(),
+                'sortedList': favorite
+            }
+        };
+        $http(req).then(function success() {
+            alert("Your list updated successfully");
+        }, function error() {
+            alert("A connection error occurred");
+        });
     };
     model.setToken = function (value) {
         window.sessionStorage.setItem("token", value);

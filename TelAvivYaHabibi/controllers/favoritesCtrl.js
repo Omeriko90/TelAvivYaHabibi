@@ -65,11 +65,17 @@ angular.module('favoritesCtrl', [])
         };
         //add an interest to the user sorted list
         $scope.addToSortUser = function (name) {
-            let temp = $scope.userSortedList;
-            temp.push($scope.categories[name]);
-            $scope.userSortedList = [];
-            for (let i = 0; i < temp.length; i++) {
-                $scope.userSortedList.push(temp[i]);
+            let poi = $scope.categories[name];
+            if(!$scope.userSortedList.includes(poi)) {
+                let temp = $scope.userSortedList;
+                temp.push($scope.categories[name]);
+                $scope.userSortedList = [];
+                for (let i = 0; i < temp.length; i++) {
+                    $scope.userSortedList.push(temp[i]);
+                }
+            }
+            else{
+                alert("You have already picked this interest");
             }
         };
         //remove an interest form the user sorted list
@@ -93,6 +99,10 @@ angular.module('favoritesCtrl', [])
         };
         //updates the DB on the user favorite list
         $scope.saveToUser = function () {
+            if($scope.userSortedList.length < $scope.userInterests.length){
+                alert("You didn't sorted all the Interests.\nPlease sort all the interests before clicking on save");
+                return;
+            }
             let favorite = '';
             for (let i = 0; i < $scope.userSortedList.length; i++) {
                 if (i < $scope.userSortedList.length - 1) {
@@ -104,23 +114,7 @@ angular.module('favoritesCtrl', [])
             }
             //updates the DB with the new sorted list
             userService.setFavorite(favorite);
-            var req = {
-                method: 'PUT',
-                url: 'http://localhost:3000/private/privateInterest/sortedList',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth-token': userService.getToken()
-                },
-                data: {
-                    'username': userService.getUsername(),
-                    'sortedList': favorite
-                }
-            };
-            $http(req).then(function success() {
-                alert("Your list updated successfully");
-            }, function error() {
-                alert("A connection error occurred");
-            });
+            userService.updateFavoriteDB($http,favorite);
         };
         //gets the clicked interest details
         $scope.getDetails = function (event) {

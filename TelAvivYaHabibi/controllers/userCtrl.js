@@ -1,7 +1,7 @@
 angular.module('userCtrl', [])
 
     .controller("userCtrl", function ($http, $window, restoreQuestion, checkOnlyLetter, userService, interestDetails) {
-        if(userService.getUsername() == null){
+        if (userService.getUsername() == null) {
             userService.start();
         }
         let Controller = this;
@@ -14,8 +14,8 @@ angular.module('userCtrl', [])
             }
         });
         //close the model popup
-        Controller.modalClose = function(){
-          document.getElementById("popup").style.display = "none";
+        Controller.modalClose = function () {
+            document.getElementById("popup").style.display = "none";
         };
         //gets the details of the clicked interest
         Controller.getDetails = function (event) {
@@ -108,8 +108,7 @@ angular.module('userCtrl', [])
                 }, function error() {
                     alert("A connection error occurred")
                 });
-            }
-            else{
+            } else {
                 alert("Wrong answer!\nPlease try again.")
             }
         };
@@ -150,17 +149,27 @@ angular.module('userCtrl', [])
             checkOnlyLetter.check(event);
         };
         //logs out of the user account
-        Controller.logOut = function(){
+        Controller.logOut = function () {
             document.getElementById("register").style.display = "block";
             document.getElementById("login").style.display = "block";
             document.getElementById("logout").style.display = "none";
             Controller.welcomeMessage = 'Guest';
-          userService.clearSession();
+            let favorite = '';
+            let favoriteArr = userService.getFavorite();
+            for (let i = 0; i < favoriteArr.length; i++) {
+                if (i < favoriteArr.length - 1) {
+                    favorite += favoriteArr[i] + ',';
+                } else {
+                    favorite += favoriteArr[i];
+                }
+            }
+            userService.updateFavoriteDB($http, favorite);
+            userService.clearSession();
         };
         //validate that the new user inserted all the fields correctly and sign him up
         Controller.validateUser = function (isValid) {
-            if(Controller.category.length <2){
-                isValid=false;
+            if (Controller.category.length < 2) {
+                isValid = false;
             }
             if (isValid) {
                 for (let i in Controller.register) {
