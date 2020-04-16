@@ -1,6 +1,6 @@
 # TelAvivYaHabibi
 Download the zip file and open the 2 directories in to different windows.
-The server you can open in Webstorm or VS Code.
+The server can be open in Webstorm or VS Code.
 The TelAvivYaHabibi you can open only in Webstrom.
 ## Server
 
